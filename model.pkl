@@ -1,0 +1,63 @@
+# %%
+import pandas as pd
+
+# %%
+df = pd.read_csv('StudentsPerformance.csv')
+
+# %% [markdown]
+# Explore data
+
+# %%
+df.head(10)
+
+# %%
+df.describe()
+
+# %%
+df.isna().sum()
+
+# %%
+df.info()
+
+# %% [markdown]
+# Data reprocessing
+
+# %%
+#select relecant columns
+x = df[['math score','reading score','writing score']]
+y = df['race/ethnicity']
+
+# %% [markdown]
+# since race/ethnicity is a categorical value we need to convert it to a numerical label
+
+# %%
+from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+y = le.fit_transform(y)
+
+# %% [markdown]
+# Next split the data
+
+# %%
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test = train_test_split(x,y, test_size=0.2, random_state = 42)
+
+# %% [markdown]
+# Model selection
+
+# %%
+# Logistic Regression
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+lr = LogisticRegression()
+lr.fit(x_train,y_train)
+
+# %%
+# make predicitons
+y_pred_lr = lr.predict(x_test)
+
+#evaluate
+accuracy = accuracy_score(y_test,y_pred_lr)
+conf_mat = confusion_matrix(y_test,y_pred_lr)
+print(accuracy)
+conf_mat
