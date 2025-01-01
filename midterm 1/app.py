@@ -15,7 +15,7 @@ y = data['race/ethnicity']
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
 
 # Load the trained model
-with open('./workspaces/ANA-680/midterm 1/model.pkl', 'rb') as file:
+with open('model.pkl', 'rb') as file:
     model = pickle.load(file)
 
 @app.route('/')
