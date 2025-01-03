@@ -28,15 +28,19 @@ def index():
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
-        # Collect input features from the form
+        # Collect input features
         features = [
             float(request.form['math_score']),
             float(request.form['reading_score']),
             float(request.form['writing_score'])
         ]
-        
+
+        # Reshape features to match model's expected input
+        features_array = np.array(features).reshape(1, -1)
+
         # Make prediction
-        prediction = model.predict(np.array([features]))
+        prediction = model.predict(features_array)
+        
         return render_template('index.html', prediction=prediction[0])
     except Exception as e:
         return render_template('index.html', error=str(e))
