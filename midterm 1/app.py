@@ -6,7 +6,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 import os
 print("Current Working Directory:", os.getcwd())
-
+os.chdir('/workspaces/ANA-680/midterm 1/')
 
 app = Flask(__name__)
 
