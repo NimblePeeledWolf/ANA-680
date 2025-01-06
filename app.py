@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 app = Flask(__name__)
 
 # Load data
-data = pd.read_csv('/workspaces/ANA-680/StudentsPerformance.csv')
+data = pd.read_csv('StudentsPerformance.csv')
 x = data[['math score', 'writing score', 'reading score']]
 y = data['race/ethnicity']
 
